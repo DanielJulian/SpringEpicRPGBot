@@ -8,7 +8,6 @@ import org.springframework.validation.annotation.Validated;
 
 
 @Validated
-@Configuration
 @ConfigurationProperties(prefix = "bot")
 @PropertySource("classpath:discord.properties")
 public class DiscordConfiguration {

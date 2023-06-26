@@ -9,14 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class SeleniumService {
 
+    @Autowired
     WebDriver driver;
+
+    @Autowired
     DiscordConfiguration discordCfg;
-
-
-    public SeleniumService(WebDriver driver, DiscordConfiguration discordCfg) {
-        this.driver = driver;
-        this.discordCfg = discordCfg;
-    }
 
     @PostConstruct
     public void initialize() {
