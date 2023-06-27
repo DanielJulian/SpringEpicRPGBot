@@ -1,12 +1,11 @@
 package com.danny.epicrpgbot;
 
 import com.danny.epicrpgbot.config.AppConfiguration;
-import com.danny.epicrpgbot.config.DiscordConfiguration;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 
-@EnableConfigurationProperties({AppConfiguration.class, DiscordConfiguration.class})
+@EnableConfigurationProperties({AppConfiguration.class})
 @SpringBootApplication
 public class EpicRpgBotApplication {
 

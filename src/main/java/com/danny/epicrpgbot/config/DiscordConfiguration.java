@@ -1,25 +1,30 @@
 package com.danny.epicrpgbot.config;
 
-import jakarta.validation.constraints.NotBlank;
-import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
-import org.springframework.validation.annotation.Validated;
 
-
-@Validated
-@ConfigurationProperties(prefix = "bot")
-@PropertySource("classpath:discord.properties")
+@Configuration
+@ConfigurationPropertiesScan
+@PropertySource("discord.properties")
 public class DiscordConfiguration {
 
-    @NotBlank
+    @Value("${bot.channel.url}")
     private String channelUrl;
 
-    public String getChannelUrl() {
-        return channelUrl;
+    @Value("${user.email}")
+    private String userEmail;
+
+    @Value("${user.password}")
+    private String userPassword;
+
+    @Bean
+    public DiscordCfg modelBean() {
+        return new DiscordCfg(channelUrl, userEmail, userPassword);
     }
 
-    public void setChannelUrl(String channelUrl) {
-        this.channelUrl = channelUrl;
+    public record DiscordCfg(String channelUrl, String email, String password) {
     }
 }
