@@ -25,26 +25,25 @@ public class ScheduledCommandService {
     @Scheduled(fixedDelayString = "${app.work-delay}")
     private void work() throws InterruptedException {
         randomDelay();
-        String workToPerform = getRandomFromList(configuration.getWorkCommands());
-        System.out.println("Executing work schedule " + workToPerform);
-        applicationEventPublisher.publishEvent(buildCommandEvent(workToPerform));
+        String workCommand = getRandomFromList(configuration.getWorkCommands());
+        applicationEventPublisher.publishEvent(buildCommandEvent(workCommand));
     }
 
     @Scheduled(fixedDelayString = "${app.hunt-delay}")
     private void hunt() throws InterruptedException {
         randomDelay();
-        String huntToPerform = getRandomFromList(configuration.getHuntCommands());
-        System.out.println("Executing hunt schedule " + huntToPerform);
-        applicationEventPublisher.publishEvent(buildCommandEvent(huntToPerform));
+        String huntCommand = getRandomFromList(configuration.getHuntCommands());
+        applicationEventPublisher.publishEvent(buildCommandEvent(huntCommand));
+    }
+
+    @Scheduled(fixedDelayString = "${app.weekly-delay}")
+    private void weekly() throws InterruptedException {
+        randomDelay();
+        String weeklyCommand = getRandomFromList(configuration.getWeeklyCommands());
+        applicationEventPublisher.publishEvent(buildCommandEvent(weeklyCommand));
     }
 
      /*
-
-   def weekly(self, initial_cooldown=0):
-      time.sleep(initial_cooldown)
-      while True:
-         self.command_queue.put('rpg weekly')
-         time.sleep(604800) # 1 Week
 
    def daily(self, initial_cooldown=0):
       time.sleep(initial_cooldown)

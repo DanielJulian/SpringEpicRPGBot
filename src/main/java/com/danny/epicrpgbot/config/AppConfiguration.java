@@ -19,6 +19,8 @@ public class AppConfiguration {
     private long workDelay;
     private List<String> huntCommands;
     private long huntDelay;
+    private List<String> weeklyCommands;
+    private long weeklyDelay;
 
     public String getSeleniumDriver() {
         return seleniumDriver;
@@ -58,5 +60,21 @@ public class AppConfiguration {
 
     public void setHuntDelay(String huntDelay) {
         this.huntDelay = Duration.parse(huntDelay).toMillis();
+    }
+
+    public List<String> getWeeklyCommands() {
+        return weeklyCommands;
+    }
+
+    public void setWeeklyCommands(List<String> weeklyCommands) {
+        this.weeklyCommands = weeklyCommands;
+    }
+
+    public long getWeeklyDelay() {
+        return weeklyDelay;
+    }
+
+    public void setWeeklyDelay(String weeklyDelay) {
+        this.weeklyDelay = Duration.parse(weeklyDelay).toMillis();
     }
 }

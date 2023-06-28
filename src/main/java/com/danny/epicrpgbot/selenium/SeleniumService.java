@@ -47,10 +47,8 @@ public class SeleniumService {
 
     }
 
-
-
     @EventListener
-    public void handleContextStart(CommandEvent ce) {
+    public void handleCommand(CommandEvent ce) {
         System.out.println("Command Event received: " + ce);
     }
 
