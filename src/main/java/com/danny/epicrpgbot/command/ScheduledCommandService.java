@@ -43,13 +43,22 @@ public class ScheduledCommandService {
         applicationEventPublisher.publishEvent(buildCommandEvent(weeklyCommand));
     }
 
+    @Scheduled(fixedDelayString = "${app.daily-delay:86400000}")
+    private void daily() throws InterruptedException {
+        randomDelay();
+        String dailyCommand = "daily";
+        applicationEventPublisher.publishEvent(buildCommandEvent(dailyCommand));
+    }
+
+    @Scheduled(fixedDelayString = "${app.adventure-delay:3600000}")
+    private void adventure() throws InterruptedException {
+        randomDelay();
+        applicationEventPublisher.publishEvent(buildCommandEvent("heal"));
+        applicationEventPublisher.publishEvent(buildCommandEvent("adventure"));
+    }
+
      /*
 
-   def daily(self, initial_cooldown=0):
-      time.sleep(initial_cooldown)
-      while True:
-         self.command_queue.put('rpg daily')
-         time.sleep(86500) # 24 Hours
 
    def lootbox(self, initial_cooldown=0):
       time.sleep(initial_cooldown)
@@ -79,12 +88,7 @@ public class ScheduledCommandService {
          self.command_queue.put(command)
          time.sleep(610 + randint(0, 10)) # 10 minutes 10 secs + random
 
-   def adventure(self, initial_cooldown=0):
-      time.sleep(initial_cooldown)
-      while True:
-         self.command_queue.put('rpg heal')
-         self.command_queue.put('rpg adventure')
-         time.sleep(3601 + randint(0, 10)) # 1 hour + random secs
+
      * */
 
     private CommandEvent buildCommandEvent(String command) {
