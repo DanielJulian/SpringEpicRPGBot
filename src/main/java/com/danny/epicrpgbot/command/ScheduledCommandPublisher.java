@@ -13,7 +13,7 @@ import java.util.random.RandomGenerator;
 
 @Service
 @EnableScheduling
-public class ScheduledCommandService {
+public class ScheduledCommandPublisher {
 
     private final String RPG_COMMAND = "rpg ";
 

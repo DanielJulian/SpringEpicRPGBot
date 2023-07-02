@@ -20,11 +20,14 @@ public class DiscordConfiguration {
     @Value("${user.password}")
     private String userPassword;
 
+    @Value("${bot.listener.token}")
+    private String botToken;
+
     @Bean
     public DiscordCfg modelBean() {
-        return new DiscordCfg(channelUrl, userEmail, userPassword);
+        return new DiscordCfg(channelUrl, userEmail, userPassword, botToken);
     }
 
-    public record DiscordCfg(String channelUrl, String email, String password) {
+    public record DiscordCfg(String channelUrl, String email, String password, String botToken) {
     }
 }
