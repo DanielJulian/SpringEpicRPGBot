@@ -2,24 +2,26 @@ package com.danny.epicrpgbot.command;
 
 import org.springframework.context.ApplicationEvent;
 
+import java.util.List;
+
 
 public class CommandEvent extends ApplicationEvent {
 
-    private final String command;
+    private final List<String> commands;
 
-    public CommandEvent(Object source, String command) {
+    public CommandEvent(Object source, List<String> commands) {
         super(source);
-        this.command = command;
+        this.commands = commands;
     }
 
-    public String getCommand() {
-        return command;
+    public List<String> getCommands() {
+        return commands;
     }
 
     @Override
     public String toString() {
         return "CommandEvent{" +
-                "command='" + command + '\'' +
+                "commands='" + commands + '\'' +
                 '}';
     }
 }

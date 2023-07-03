@@ -22,6 +22,8 @@ public class AppConfiguration {
     private List<String> weeklyCommands;
     private long weeklyDelay;
 
+    private int hpThreshold;
+
     public String getSeleniumDriver() {
         return seleniumDriver;
     }
@@ -76,5 +78,13 @@ public class AppConfiguration {
 
     public void setWeeklyDelay(String weeklyDelay) {
         this.weeklyDelay = Duration.parse(weeklyDelay).toMillis();
+    }
+
+    public int getHpThreshold() {
+        return hpThreshold;
+    }
+
+    public void setHpThreshold(int hpThreshold) {
+        this.hpThreshold = hpThreshold;
     }
 }

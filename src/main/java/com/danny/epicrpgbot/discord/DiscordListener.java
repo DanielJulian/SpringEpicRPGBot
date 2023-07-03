@@ -42,11 +42,6 @@ public class DiscordListener {
                                 applicationEventPublisher.publishEvent(message);
                             }
 
-                            /* if (message.getContent().equalsIgnoreCase("!ping")) {
-                                return message.getChannel()
-                                        .flatMap(channel -> channel.createMessage("Pong!"));
-                            } */
-
                             return Mono.empty();
                         }))
                     .block();

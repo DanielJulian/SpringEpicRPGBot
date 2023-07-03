@@ -7,6 +7,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 import java.util.random.RandomGenerator;
@@ -14,8 +15,6 @@ import java.util.random.RandomGenerator;
 @Service
 @EnableScheduling
 public class ScheduledCommandPublisher {
-
-    private final String RPG_COMMAND = "rpg ";
 
     @Autowired
     private ApplicationEventPublisher applicationEventPublisher;
@@ -53,8 +52,8 @@ public class ScheduledCommandPublisher {
     @Scheduled(fixedDelayString = "${app.adventure-delay:3600000}")
     private void adventure() throws InterruptedException {
         randomDelay();
-        applicationEventPublisher.publishEvent(buildCommandEvent("heal"));
-        applicationEventPublisher.publishEvent(buildCommandEvent("adventure"));
+        CommandEvent commandEvent = buildCommandEvent("heal", "adventure");
+        applicationEventPublisher.publishEvent(commandEvent);
     }
 
      /*
@@ -92,7 +91,13 @@ public class ScheduledCommandPublisher {
      * */
 
     private CommandEvent buildCommandEvent(String command) {
-        return new CommandEvent(this, RPG_COMMAND + command);
+        return new CommandEventBuilder(this).chainCommand(command).build();
+    }
+
+    private CommandEvent buildCommandEvent(String... commands) {
+        CommandEventBuilder commandEventBuilder = new CommandEventBuilder(this);
+        Arrays.stream(commands).forEach(commandEventBuilder::chainCommand);
+        return commandEventBuilder.build();
     }
 
     private void randomDelay() throws InterruptedException { // add random delay between 1 and 10 seconds
