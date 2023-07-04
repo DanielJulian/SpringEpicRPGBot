@@ -1,6 +1,5 @@
 package com.danny.epicrpgbot.discord.feedback.handler;
 
-import com.danny.epicrpgbot.command.CommandEventBuilder;
 import com.danny.epicrpgbot.config.AppConfiguration;
 import discord4j.core.object.entity.Message;
 import org.springframework.stereotype.Component;
